@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('posts');
 });
 
-Route::get('post', function () {
-    return view('post');
-});
+Route::get('posts/{post}', function ($slug) {
+    $file = __DIR__ . "/../resources/posts/$slug.html";
+    if (!file_exists($file))
+//        ddd("file $file doesn't exist");
+//        dd("file $file doesn't exist");
+//        abort('404');
+        return redirect('/');
+    $post = file_get_contents($file);
+    return view('post',
+        ['post' => $post]);
+})->where('post', '[A-z_\-]+');
