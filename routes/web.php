@@ -24,7 +24,7 @@ Route::get('posts/{post}', function ($slug) {
 //        dd("file $file doesn't exist");
 //        abort('404');
         return redirect('/');
-    $post = file_get_contents($file);
+    $post = cache()->remember("posts/$slug", now()->addHour(3), fn () => file_get_contents($file));
     return view('post',
         ['post' => $post]);
 })->where('post', '[A-z_\-]+');
