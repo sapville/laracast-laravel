@@ -2,7 +2,6 @@
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,21 +16,8 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('/', function () {
 
-    $posts = [];
-
-    foreach (Post::all() as $post) {
-        $doc = YamlFrontMatter::parse($post);
-        $posts[] = new Post(
-            $doc->matter('title'),
-            $doc->matter('excerpt'),
-            DateTimeImmutable::createFromFormat('Ymd', $doc->matter('date')),
-            $doc->body(),
-            $doc->matter('slug')
-        );
-    }
-
     return view('posts', [
-        'posts' => $posts
+        'posts' => Post::all()
     ]);
 });
 
