@@ -1,9 +1,6 @@
-<!doctype html>
+@extends('layout')
 
-<title>My Post</title>
-<link rel="stylesheet" href="{{'/app.css'}}">
-
-<body>
+@section('content')
 <article>
     <h1>{{$blogPost->title}}</h1>
     <div>
@@ -11,4 +8,4 @@
     </div>
 </article>
 <a href="/">Go Back</a>
-</body>
+@endsection
