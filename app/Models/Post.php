@@ -45,9 +45,8 @@ class Post
     public static function all(): Collection
     {
         return collect(File::files(resource_path('posts')))
-            ->map(fn($file) => YamlFrontMatter::parse(
-                cache()->remember($file->getFileName(), now()->addMinutes(30), fn() => $file->getContents())
-            ))
+            ->map(fn($file) => YamlFrontMatter::parse(cache()->remember($file->getFileName(), now()->addMinutes(30), fn() => $file->getContents())))
+//            ->map(fn($file) => YamlFrontMatter::parseFile($file))
             ->map(fn($doc) => new Post(
                 $doc->matter('title'),
                 $doc->matter('excerpt'),
