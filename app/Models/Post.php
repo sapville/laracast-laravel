@@ -37,9 +37,12 @@ class Post
     /**
      * @throws Exception
      */
-    public static function find(string $slug): Post
+    public static function findOrFail(string $slug): Post
     {
-        return self::all()->firstWhere('slug', $slug);
+        $post = self::find($slug);
+        if (!$post)
+            throw new ModelNotFoundException();
+        return $post;
     }
 
     public static function all(): Collection
@@ -55,5 +58,10 @@ class Post
                 $doc->matter('slug')
             ))
             ->sort(fn($a, $b) => $a->date->getTimestamp() >= $b->date->getTimestamp() ? -1 : 1);
+    }
+
+    private static function find(string $slug)
+    {
+        return self::all()->firstWhere('slug', $slug);
     }
 }
