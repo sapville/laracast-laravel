@@ -21,9 +21,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('posts/{post}', function ($id) {
+Route::get('posts/{post:slug}', function (Post $post) {
 
     return view('post',
-        ['blogPost' => Post::findOrFail($id)]);
+        ['blogPost' => $post]
+    );
 
 });

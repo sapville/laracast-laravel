@@ -2,7 +2,7 @@
     <article>
         <h1>{{$blogPost->title}}</h1>
         <div>
-            {!!$blogPost->body!!}
+            <p>{{$blogPost->body}}</p>
         </div>
     </article>
     <a href="/">Go Back</a>
