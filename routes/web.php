@@ -32,6 +32,7 @@ Route::get('posts/{post:slug}', function (Post $post) {
 
 Route::get('categories/{category:slug}', function (Category $category) {
     return view('posts',
-        ['blogPosts' => $category->posts]
+//        ['blogPosts' => $category->posts]
+        ['blogPosts' => Post::where('category_id', $category->id)->with('category')->get()]
     );
 });

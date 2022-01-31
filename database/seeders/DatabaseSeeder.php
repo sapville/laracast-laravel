@@ -17,7 +17,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
+
+        $user = User::factory()->create();
+
+        $workCategory = Category::factory()->create([
+            'slug' => 'work',
+            'name' => 'Work'
+        ]);
+        $personalCategory = Category::factory()->create([
+            'slug' => 'personal',
+            'name' => 'Personal'
+        ]);
+        $familyCategory = Category::factory()->create([
+            'slug' => 'family',
+            'name' => 'Family'
+        ]);
+
+
+        Post::factory(3)->create([
+            'user_id' => $user->id,
+            'category_id' => $workCategory->id,
+        ]);
+        Post::factory(2)->create([
+            'user_id' => $user->id,
+            'category_id' => $personalCategory->id,
+        ]);
+        Post::factory(1)->create([
+            'user_id' => $user->id,
+            'category_id' => $familyCategory->id,
+        ]);
+/*        DB::table('users')->truncate();
         DB::table('categories')->truncate();
         DB::table('posts')->truncate();
 
@@ -53,6 +82,6 @@ class DatabaseSeeder extends Seeder
             'excerpt' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
             'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             'published_at' => null
-        ]);
+        ]);*/
     }
 }
