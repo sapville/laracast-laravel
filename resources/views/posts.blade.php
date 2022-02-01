@@ -4,7 +4,7 @@
 
         @include('_post-header')
         @if($blogPosts->count())
-            <x-posts-grid :blogPosts="$blogPosts"/>
+            <x-posts-grid :blogPosts="$blogPosts"></x-posts-grid>
         @else
             <p class="text-center">No posts yet</p>
         @endif
