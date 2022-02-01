@@ -3,19 +3,11 @@
     <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
 
         @include('_post-header')
-
-        <x-featured-post :post="$blogPosts[0]"/>
-
-        <div class="lg:grid lg:grid-cols-2">
-            <x-post-card/>
-            <x-post-card/>
-        </div>
-
-        <div class="lg:grid lg:grid-cols-3">
-            <x-post-card/>
-            <x-post-card/>
-            <x-post-card/>
-        </div>
+        @if($blogPosts->count())
+            <x-posts-grid :blogPosts="$blogPosts"/>
+        @else
+            <p class="text-center">No posts yet</p>
+        @endif
     </main>
 
 </x-layout>
