@@ -33,14 +33,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Post::factory(3)->create([
+        Post::factory(5)->create([
             'user_id' => $user->id,
             'category_id' => $workCategory->id,
         ]);
-        Post::factory(2)->create([
+        Post::factory(4)->create([
             'category_id' => $personalCategory->id,
         ]);
-        Post::factory(1)->create([
+        Post::factory(3)->create([
             'user_id' => $user->id,
             'category_id' => $familyCategory->id,
         ]);
