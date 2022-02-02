@@ -21,7 +21,8 @@ Route::get('/', function () {
 //    \Illuminate\Support\Facades\DB::listen(fn($query) => logger($query->sql, $query->bindings));
 
     return view('posts', [
-        'blogPosts' => Post::all()
+        'blogPosts' => Post::all(),
+        'categories' => Category::all()
     ]);
 });
 
@@ -32,13 +33,16 @@ Route::get('posts/{post:slug}', function (Post $post) {
 });
 
 Route::get('categories/{category:slug}', function (Category $category) {
-    return view('posts',
-        ['blogPosts' => $category->posts]
-    );
+    return view('posts', [
+        'blogPosts' => $category->posts,
+        'currentCategory' => $category,
+        'categories' => Category::all()
+    ]);
 });
 
 Route::get('authors/{author:username}', function (User $author) {
-    return view('posts',
-        ['blogPosts' => $author->posts]
-    );
+    return view('posts', [
+        'blogPosts' => $author->posts,
+        'categories' => Category::all()
+    ]);
 });
