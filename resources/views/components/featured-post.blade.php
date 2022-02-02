@@ -40,7 +40,6 @@
 
 
 }}</h5>
-                        <h6>Mascot at Laracasts</h6>
                     </div>
                 </div>
 
