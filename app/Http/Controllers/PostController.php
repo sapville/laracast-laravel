@@ -10,7 +10,7 @@ class PostController extends Controller
     {
         //    \Illuminate\Support\Facades\DB::listen(fn($query) => logger($query->sql, $query->bindings));
         return view('posts.index', [
-            'blogPosts' => Post::query()->latest()->filter(request()->only(['search', 'category']))->get(),
+            'blogPosts' => Post::query()->latest()->filter(request()->only(['search', 'category', 'author']))->get(),
         ]);
     }
 
