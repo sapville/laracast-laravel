@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,32 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [PostController::class, 'index'])->name('home');
 
-//    \Illuminate\Support\Facades\DB::listen(fn($query) => logger($query->sql, $query->bindings));
-
-    $posts = Post::latest();
-
-    if ($request = request('search')) {
-        $posts
-            ->where('body', 'like', "%$request%")
-            ->orWhere('title', 'like', "%$request%");
-    }
-    return view('posts', [
-        'blogPosts' => $posts->get(),
-        'categories' => Category::all()
-    ]);
-})->name('home');
-
-Route::get('posts/{post:slug}', function (Post $post) {
-    return view('post',
-        ['blogPost' => $post]
-    );
-})->name('posts');
+Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts');
 
 Route::get('categories/{category:slug}', function (Category $category) {
+
     return view('posts', [
-        'blogPosts' => $category->posts,
+        'blogPosts' => $category->posts()->getQuery()->latest()->filter(request()->only('search'))->get(),
         'currentCategory' => $category,
         'categories' => Category::all()
     ]);
@@ -50,7 +32,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
 
 Route::get('authors/{author:username}', function (User $author) {
     return view('posts', [
-        'blogPosts' => $author->posts,
+        'blogPosts' => $author->posts()->getQuery()->latest()->filter(request()->only('search'))->get(),
         'categories' => Category::all()
     ]);
 })->name('authors');
