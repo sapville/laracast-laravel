@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -14,8 +13,6 @@ class PostController extends Controller
 
         return view('posts', [
             'blogPosts' => Post::query()->latest()->filter(request()->only(['search', 'category']))->get(),
-            'categories' => Category::all(),
-            'currentCategory' => Category::query()->firstWhere('slug', request('category'))
         ]);
     }
 
