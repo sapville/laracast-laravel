@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +21,15 @@ Route::get('/', function () {
 
 //    \Illuminate\Support\Facades\DB::listen(fn($query) => logger($query->sql, $query->bindings));
 
+    $posts = Post::latest();
+
+    if ($request = request('search')) {
+        $posts
+            ->where('body', 'like', "%$request%")
+            ->orWhere('title', 'like', "%$request%");
+    }
     return view('posts', [
-        'blogPosts' => Post::all(),
+        'blogPosts' => $posts->get(),
         'categories' => Category::all()
     ]);
 })->name('home');
