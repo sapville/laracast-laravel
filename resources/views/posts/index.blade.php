@@ -8,6 +8,7 @@
         @else
             <p class="text-center">No posts yet</p>
         @endif
+        {{$blogPosts->onEachSide(1)->links()}}
     </main>
 
 </x-layout>

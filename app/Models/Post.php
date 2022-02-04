@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Traits\Conditionable;
 
 class Post extends Model
 {
@@ -49,6 +48,7 @@ class Post extends Model
         $query->when($request['author'] ?? false, function (Builder $builder, $search) {
             $builder->whereRelation('author', 'username', $search);
         });
+
     }
 
 }
