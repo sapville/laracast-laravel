@@ -8,7 +8,7 @@
         </button>
     </x-slot>
     <x-dropdown-item
-        href="/"
+        href="/?{{http_build_query(request()->except('category'))}}"
         :active="!request('category')"
     >All</x-dropdown-item>
     @foreach($categories as $category)
