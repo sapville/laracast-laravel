@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Validation\Rule;
-use Whoops\Run;
 
 class RegistrationController extends Controller
 {
@@ -20,9 +19,12 @@ class RegistrationController extends Controller
             'username' => ['required', 'max:255', 'min:3', Rule::unique('users', 'username')],
             'email' => ['required', 'max:255', 'email', Rule::unique('users', 'email')],
             'password' => ['required', 'max:255', 'min:7'],
+            'confirmPassword' => ['required', 'same:password']
         ]);
 
-        User::query()->create($attributes);
+        $user = User::query()->create($attributes);
+
+        auth()->login($user);
 
         return redirect('/')->with('success', 'Your user has been registered');
     }
