@@ -18,10 +18,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        DB::table('posts')->truncate();
-        DB::table('categories')->truncate();
-        DB::table('users')->truncate();
-
         $user = User::factory()->create();
 
         $workCategory = Category::factory()->create([
@@ -36,19 +32,20 @@ class DatabaseSeeder extends Seeder
             'slug' => 'family',
             'name' => 'Family'
         ]);
-        Category::factory(10)->create();
 
 
-        Post::factory(5)->create([
+        Post::factory(10)->create([
             'user_id' => $user->id,
             'category_id' => $workCategory->id,
         ]);
-        Post::factory(4)->create([
+        Post::factory(8)->create([
             'category_id' => $personalCategory->id,
         ]);
-        Post::factory(3)->create([
+        Post::factory(6)->create([
             'user_id' => $user->id,
             'category_id' => $familyCategory->id,
         ]);
+        Post::factory(10)->create();
+
     }
 }
