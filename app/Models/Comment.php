@@ -23,18 +23,4 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function store(Post $post): RedirectResponse
-    {
-        request()->validate([
-            'body' => ['required']
-        ]);
-
-        $post->comments()->create([
-            'body' => request('body'),
-            'user_id' => auth()->user()->id,
-        ]);
-
-        return back();
-    }
-
 }
