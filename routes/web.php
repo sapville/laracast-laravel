@@ -10,8 +10,8 @@ Route::get('/', [PostController::class, 'index']);
 
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::post('posts/{post:slug}/comment', [CommentController::class, 'store']);
-Route::post('/comment-delete/{comment}', [CommentController::class, 'destroy']);
+Route::post('posts/{post:slug}/comment', [CommentController::class, 'store'])->middleware('auth');
+Route::post('/comment-delete/{comment}', [CommentController::class, 'destroy'])->middleware('auth');
 
 Route::get('register', [RegistrationController::class, 'create'])->middleware('guest');
 Route::post('register', [RegistrationController::class, 'store'])->middleware('guest');
