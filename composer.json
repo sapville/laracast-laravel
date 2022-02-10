@@ -11,7 +11,9 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "spatie/yaml-front-matter": "^2.0"
+        "mailchimp/marketing": "^3.0",
+        "spatie/yaml-front-matter": "^2.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

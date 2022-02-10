@@ -19,11 +19,9 @@
                     placeholder="Quick, think of something to say!"></textarea>
             </div>
 
-            @if($errors->any())
-                @error('body')
-                <span class="text-xs text-red-500">{{$message}}</span>
-                @enderror
-            @endif
+            @error('body')
+            <span class="text-xs text-red-500">{{$message}}</span>
+            @enderror
             <x-sumbit-button>Post</x-sumbit-button>
         </form>
     </x-panel>
