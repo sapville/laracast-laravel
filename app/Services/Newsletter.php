@@ -12,59 +12,21 @@ class Newsletter
 {
     private ApiClient $client;
 
-    public function __construct()
+    public function __construct(ApiClient $client)
     {
-
-        $this->client = new ApiClient();
-
-        $this->callAPI(
-            fn() => $this->client->setConfig([
-                'apiKey' => config('services.mailchimp.key'),
-                'server' => 'us14'
-            ])
-        );
-
+        $this->client = $client;
     }
 
     public function subscribe($email, $list = null)
     {
         $list ??= config('services.mailchimp.lists.test');
-        $this->callAPI(
-            function ($args) {
-
-                $list = Arr::first(
-                    $this->client->lists->getAllLists()->lists,
-                    fn($value) => $value->name === $args['list']
-                );
-                $this->client->lists->addListMember($list->id, [
-                    "email_address" => $args['email'],
-                    "status" => "subscribed",
-                ]);
-            },
-            ['email' => $email, 'list' => $list]
+        $list = Arr::first(
+            $this->client->lists->getAllLists()->lists,
+            fn($value) => $value->name === $list
         );
-    }
-
-    private function callAPI(callable $callback, array $args = [])
-    {
-        try {
-
-            $callback($args);
-
-        } catch (ClientException $e) {
-            $error = json_decode($e->getResponse()->getBody()->getContents());
-            throw ValidationException::withMessages(['email' => $error->title]);
-        } catch (Exception $e) {
-            throw ValidationException::withMessages(['email' => 'Error when subscribing']);
-        }
-
-    }
-
-    /**
-     * @return ApiClient
-     */
-    public function getClient(): ApiClient
-    {
-        return $this->client;
+        $this->client->lists->addListMember($list->id, [
+            "email_address" => $email,
+            "status" => "subscribed",
+        ]);
     }
 }
