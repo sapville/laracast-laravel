@@ -28,7 +28,7 @@ class Newsletter
 
     public function subscribe($email, $list = null)
     {
-        $list ??= config('services.mailchimp.list');
+        $list ??= config('services.mailchimp.lists.test');
         $this->callAPI(
             function ($args) {
 
