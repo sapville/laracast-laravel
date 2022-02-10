@@ -2,31 +2,7 @@
 
 namespace App\Services;
 
-use Exception;
-use Illuminate\Support\Arr;
-use Illuminate\Validation\ValidationException;
-use MailchimpMarketing\ApiClient;
-use GuzzleHttp\Exception\ClientException;
-
-class Newsletter
+interface Newsletter
 {
-    private ApiClient $client;
-
-    public function __construct(ApiClient $client)
-    {
-        $this->client = $client;
-    }
-
-    public function subscribe($email, $list = null)
-    {
-        $list ??= config('services.mailchimp.lists.test');
-        $list = Arr::first(
-            $this->client->lists->getAllLists()->lists,
-            fn($value) => $value->name === $list
-        );
-        $this->client->lists->addListMember($list->id, [
-            "email_address" => $email,
-            "status" => "subscribed",
-        ]);
-    }
+    public function subscribe($email, $list = null);
 }
