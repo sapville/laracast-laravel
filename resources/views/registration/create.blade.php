@@ -12,7 +12,7 @@
                            value="{{ old('name') }}"
                            type="text" name="name" id="name" required>
                     @error('name')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    <x-error-text>{{ $message }}</x-error-text>
                     @enderror
                 </div>
                 <div class="mb-6">
@@ -22,7 +22,7 @@
                            value="{{ old('username') }}"
                            type="text" name="username" id="username" required>
                     @error('username')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    <x-error-text>{{ $message }}</x-error-text>
                     @enderror
                 </div>
                 <div class="mb-6">
@@ -32,7 +32,7 @@
                            value="{{ old('email') }}"
                            type="email" name="email" id="email" required>
                     @error('email')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        <x-error-text>{{ $message }}</x-error-text>
                     @enderror
                 </div>
                 <div class="mb-6">
@@ -41,7 +41,7 @@
                     <input class="border border-gray-400 p-2 w-full"
                            type="password" name="password" id="password" required>
                     @error('password')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        <x-error-text>{{ $message }}</x-error-text>
                     @enderror
                 </div>
                 <div class="mb-6">
@@ -50,7 +50,7 @@
                     <input class="border border-gray-400 p-2 w-full"
                            type="password" name="confirmPassword" id="confirmPassword" required>
                     @error('confirmPassword')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        <x-error-text>{{ $message }}</x-error-text>
                     @enderror
                 </div>
                 <div>
