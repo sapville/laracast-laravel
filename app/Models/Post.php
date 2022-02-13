@@ -22,6 +22,7 @@ class Post extends Model
         }*/
 
     protected $with = ['category', 'author'];
+    protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'body', 'category_id'];
 
     public function category(): BelongsTo
     {

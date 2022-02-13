@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
@@ -29,13 +31,34 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store()
+    /**
+     * @throws AuthorizationException
+     */
+    public function store(Post $post)
     {
+        $this->authorize('create', $post);
         $attributes = request()->validate([
-            'title' => ['required', 'max:255'],
-            'slug' => ['required', 'max:255', Rule::unique('posts', 'slug')],
-            'excerpt' => ['required']
+            'title' => ['required', 'max:255', Rule::unique('posts', 'title')],
+            'excerpt' => 'required',
+            'body' => 'required',
         ]);
 
+        $attributes['slug'] = Str::of($attributes['title'])->slug();
+        $attributes['user_id'] = auth()->user()->id;
+        $attributes['category_id'] = Category::query()->first()->id;
+
+        $post = Post::query()->create($attributes);
+
+        return redirect('posts/' . $post->slug)->with('Post has been published');
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function destroy(Post $post)
+    {
+        $this->authorize('delete', $post);
+        $post->delete();
+        return redirect('/')->with('success', 'Post has been deleted');
     }
 }

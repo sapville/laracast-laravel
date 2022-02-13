@@ -13,9 +13,10 @@ Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 Route::get('/admin/posts/create', [PostController::class, 'create'])->middleware('admin');
 Route::post('/admin/posts/create', [PostController::class, 'store'])->middleware('admin');
+Route::post('/admin/posts/{post:slug}/delete', [PostController::class, 'destroy'])->middleware('admin');
 
 Route::post('posts/{post:slug}/comment', [CommentController::class, 'store'])->middleware('auth');
-Route::post('comment-delete/{comment}', [CommentController::class, 'destroy'])->middleware('auth');
+Route::post('comment/{comment}/delete', [CommentController::class, 'destroy'])->middleware('auth');
 
 Route::get('register', [RegistrationController::class, 'create'])->middleware('guest');
 Route::post('register', [RegistrationController::class, 'store'])->middleware('guest');

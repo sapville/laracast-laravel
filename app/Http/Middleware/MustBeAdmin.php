@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Policies\PostPolicy;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,8 +18,7 @@ class MustBeAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = auth()->user() ?? null;
-        if (!$user || $user->name !== 'eugene')
+        if (!PostPolicy::isAdmin())
             abort(Response::HTTP_FORBIDDEN);
 
         return $next($request);

@@ -24,7 +24,7 @@
 
         <div class="mt-8 md:mt-0 flex items-center">
             @auth
-                <span class="pr-6 text-xs font-bold uppercase">Welcome back, {{auth()->user()->name}}</span>
+                <span class="pr-6 text-xs font-bold uppercase">Welcome back, {{Auth::user()->name}}</span>
                 <form
                     class="flex-shrink-0 text-xs font-semibold text-blue-500"
                     method="POST" action="/logout"
