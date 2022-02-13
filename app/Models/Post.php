@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -56,6 +57,12 @@ class Post extends Model
             $builder->whereRelation('author', 'username', $search);
         });
 
+    }
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['slug'] =  Str::of($value)->slug();
+        $this->attributes['title'] = $value;
     }
 
 }

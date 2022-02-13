@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Str;
@@ -41,11 +40,10 @@ class PostController extends Controller
             'title' => ['required', 'max:255', Rule::unique('posts', 'title')],
             'excerpt' => 'required',
             'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')]
         ]);
 
-        $attributes['slug'] = Str::of($attributes['title'])->slug();
         $attributes['user_id'] = auth()->user()->id;
-        $attributes['category_id'] = Category::query()->first()->id;
 
         $post = Post::query()->create($attributes);
 
@@ -59,6 +57,6 @@ class PostController extends Controller
     {
         $this->authorize('delete', $post);
         $post->delete();
-        return redirect('/')->with('success', 'Post has been deleted');
+        return back()->with('success', 'Post has been deleted');
     }
 }

@@ -1,6 +1,6 @@
 <x-layout>
     <section>
-        <x-panel class="sm:w-2/3 md:w-1/2 lg:w-5/12 w-5/6 mx-auto py-10 mt-10">
+        <x-panel class="max-w-sm mx-auto py-10 mt-10">
             <form method="POST" action="/admin/posts/create">
                 @csrf
 
@@ -34,6 +34,19 @@
                               rows="6" name="body" id="body" required
                     >{{ old('body') }}</textarea>
                     @error('body')
+                    <x-error-text>{{ $message }}</x-error-text>
+                    @enderror
+                </div>
+
+                <div class="mb-6">
+                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                           for="category_id">Category</label>
+                    <select id="category_id" name="category_id" class="border border-gray-400 text-sm">
+                        @foreach(\App\Models\Category::all() as $category)
+                            <option value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{ucwords($category->name)}}</option>
+                        @endforeach
+                    </select>
+                    @error('category_id')
                     <x-error-text>{{ $message }}</x-error-text>
                     @enderror
                 </div>
