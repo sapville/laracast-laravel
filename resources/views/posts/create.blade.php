@@ -1,7 +1,10 @@
 <x-layout>
-    <section>
-        <x-panel class="max-w-sm mx-auto py-10 mt-10">
-            <form method="POST" action="/admin/posts/create">
+    <section class="max-w-md mx-auto py-8">
+        <h1 class="text-lg font-bold mb-4">
+            Publish New Post
+        </h1>
+        <x-panel>
+            <form method="POST" action="/admin/posts/create" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-6">
@@ -41,7 +44,7 @@
                 <div class="mb-6">
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                            for="category_id">Category</label>
-                    <select id="category_id" name="category_id" class="border border-gray-400 text-sm">
+                    <select id="category_id" name="category_id" class="border border-gray-400 text-sm" required>
                         @foreach(\App\Models\Category::all() as $category)
                             <option value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{ucwords($category->name)}}</option>
                         @endforeach
@@ -51,6 +54,17 @@
                     @enderror
                 </div>
 
+                <div class="mb-6">
+                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                           for="thumbnail">Thumbnail</label>
+                    <input class="border border-gray-400 p-2 w-full"
+                           type="file" name="thumbnail" id="thumbnail" required
+                           value="{{ old('thumbnail') }}"
+                    >
+                    @error('thumbnail')
+                    <x-error-text>{{ $message }}</x-error-text>
+                    @enderror
+                </div>
                 <x-sumbit-button>Publish</x-sumbit-button>
             </form>
         </x-panel>

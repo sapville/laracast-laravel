@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,7 +24,7 @@ class Post extends Model
         }*/
 
     protected $with = ['category', 'author'];
-    protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'body', 'category_id'];
+    protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'body', 'category_id', 'thumbnail'];
 
     public function category(): BelongsTo
     {
@@ -61,8 +62,15 @@ class Post extends Model
 
     public function setTitleAttribute($value)
     {
-        $this->attributes['slug'] =  Str::of($value)->slug();
+        $this->attributes['slug'] = Str::of($value)->slug();
         $this->attributes['title'] = $value;
+    }
+
+    protected function thumbnail(): Attribute
+    {
+        return new Attribute(
+            fn($value) => asset($value ? '/storage/' . $value : '/images/illustration-' . collect(['1', '2', '3', '4', '5'])->random() . '.png')
+        );
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -33,17 +34,20 @@ class PostController extends Controller
     /**
      * @throws AuthorizationException
      */
-    public function store(Post $post)
+    public function store(Post $post, Request $request)
     {
+
         $this->authorize('create', $post);
         $attributes = request()->validate([
             'title' => ['required', 'max:255', Rule::unique('posts', 'title')],
             'excerpt' => 'required',
             'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')]
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+            'thumbnail' => ['required', 'image']
         ]);
 
         $attributes['user_id'] = auth()->user()->id;
+        $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails');
 
         $post = Post::query()->create($attributes);
 
