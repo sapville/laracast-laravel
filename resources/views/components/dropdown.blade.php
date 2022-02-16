@@ -1,4 +1,4 @@
-<div x-data="{open: false}">
+<div x-data="{open: false}" class="relative">
 
     <div @click="open = ! open">
         {{ $trigger }}

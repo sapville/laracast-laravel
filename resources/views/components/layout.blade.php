@@ -24,23 +24,36 @@
 
         <div class="mt-8 md:mt-0 flex items-center">
             @auth
-                <span class="pr-6 text-xs font-bold uppercase">Welcome back, {{Auth::user()->name}}</span>
+                <x-dropdown>
+                    <x-slot name="trigger">
+                        <button
+                            class="pr-6 text-xs font-bold uppercase">Welcome back, {{Auth::user()->name}}
+                        </button>
+                    </x-slot>
+                    <x-dropdown-item href="/admin/posts/create" active="{{request()->routeIs('post.store')}}">New Post</x-dropdown-item>
+                    <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
+                    <x-dropdown-item href="#" @click="document.getElementById('logout').submit()">
+                        Log Out
+                    </x-dropdown-item>
+                </x-dropdown>
+                <div>
                 <form
-                    class="flex-shrink-0 text-xs font-semibold text-blue-500"
+                    hidden id="logout"
                     method="POST" action="/logout"
                 >
                     @csrf
-                    <button type="submit">Log Out</button>
                 </form>
+                </div>
             @else
                 <a href="/register" class="text-xs font-bold uppercase">Register</a>
                 <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
             @endauth
-
+            <div>
             <a href="#newsletter"
                class="text-center bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                 Subscribe for Updates
             </a>
+            </div>
         </div>
     </nav>
 
