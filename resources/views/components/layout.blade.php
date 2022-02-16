@@ -33,20 +33,18 @@
                             class="pr-6 text-xs font-bold uppercase">Welcome back, {{Auth::user()->name}}
                         </button>
                     </x-slot>
-                    <x-dropdown-item href="/admin/posts/create" active="{{request()->routeIs('post.create')}}">New Post</x-dropdown-item>
+                    <x-dropdown-item href="/admin/posts/create" :active="request()->routeIs('post.create')">New Post</x-dropdown-item>
                     <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
-                    <x-dropdown-item href="#" @click="document.getElementById('logout').submit()">
+                    <x-dropdown-item href="#" x-data="{}" @click.prevent="document.getElementById('logout').submit()">
                         Log Out
                     </x-dropdown-item>
+                    <form
+                        hidden id="logout"
+                        method="POST" action="/logout"
+                    >
+                        @csrf
+                    </form>
                 </x-dropdown>
-                <div>
-                <form
-                    hidden id="logout"
-                    method="POST" action="/logout"
-                >
-                    @csrf
-                </form>
-                </div>
             @else
                 <a href="/register" class="text-xs font-bold uppercase">Register</a>
                 <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
@@ -70,7 +68,7 @@
 
         <div class="mt-10">
             <div class="mb-3">
-                @error('email')
+                @error('email-address')
                 <span class="text-xs text-red-500">{{$message}}</span>
                 @enderror
             </div>
@@ -79,11 +77,11 @@
                 <form method="POST" action="/newsletter" class="lg:flex text-sm">
                     @csrf
                     <div class="lg:py-3 lg:px-5 flex items-center">
-                        <label for="email" class="hidden lg:inline-block">
+                        <label for="email-address" class="hidden lg:inline-block">
                             <img src="/images/mailbox-icon.svg" alt="mailbox letter">
                         </label>
 
-                        <input id="email" name="email" type="email" placeholder="Your email address"
+                        <input id="email-address" name="email-address" type="email" placeholder="Your email address"
                                class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
                     </div>
 

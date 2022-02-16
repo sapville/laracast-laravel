@@ -13,7 +13,7 @@
 
             <div class="mt-6">
                 <textarea
-                    class="w-full text-sm focus:outline-none focus:ring" rows="5"
+                    class="w-full text-sm focus:outline-none focus:ring rounded-md" rows="5"
                     name="body"
                     required
                     placeholder="Quick, think of something to say!"></textarea>
@@ -22,7 +22,7 @@
             @error('body')
             <span class="text-xs text-red-500">{{$message}}</span>
             @enderror
-            <x-sumbit-button>Post</x-sumbit-button>
+            <x-form.button>Post</x-form.button>
         </form>
     </x-panel>
 @else
