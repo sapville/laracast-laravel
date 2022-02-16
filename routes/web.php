@@ -11,7 +11,7 @@ Route::get('/', [PostController::class, 'index']);
 
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::get('/admin/posts/create', [PostController::class, 'create'])->middleware('admin')->name('post.store');
+Route::get('/admin/posts/create', [PostController::class, 'create'])->middleware('admin')->name('post.create');
 Route::post('/admin/posts/create', [PostController::class, 'store'])->middleware('admin');
 Route::post('/admin/posts/{post:slug}/delete', [PostController::class, 'destroy'])->middleware('admin');
 

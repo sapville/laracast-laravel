@@ -8,6 +8,9 @@
 <script defer src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js"></script>
 
 <style>
+    * {
+        /*border: red 1px solid;*/
+    }
     html {
         scroll-behavior: smooth;
     }
@@ -22,7 +25,7 @@
             </a>
         </div>
 
-        <div class="mt-8 md:mt-0 flex items-center">
+        <div class="mt-8 md:mt-0 flex items-center flex-col sm:flex-row">
             @auth
                 <x-dropdown>
                     <x-slot name="trigger">
@@ -30,7 +33,7 @@
                             class="pr-6 text-xs font-bold uppercase">Welcome back, {{Auth::user()->name}}
                         </button>
                     </x-slot>
-                    <x-dropdown-item href="/admin/posts/create" active="{{request()->routeIs('post.store')}}">New Post</x-dropdown-item>
+                    <x-dropdown-item href="/admin/posts/create" active="{{request()->routeIs('post.create')}}">New Post</x-dropdown-item>
                     <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
                     <x-dropdown-item href="#" @click="document.getElementById('logout').submit()">
                         Log Out
@@ -48,7 +51,7 @@
                 <a href="/register" class="text-xs font-bold uppercase">Register</a>
                 <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
             @endauth
-            <div>
+            <div class="m-6 sm:m-auto">
             <a href="#newsletter"
                class="text-center bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                 Subscribe for Updates
