@@ -15,7 +15,7 @@
                         Post</a>
                 </li>
                 <li>
-                    <a href="/admin/dashboard" class="text-sm text-left">Dashboard</a>
+                    <a href="/admin/dashboard" class="text-sm text-left {{request()->routeIs('dashboard') ? 'text-blue-500' : ''}}">Dashboard</a>
                 </li>
             </ul>
         </aside>

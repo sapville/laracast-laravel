@@ -11,6 +11,7 @@
     * {
         /*border: red 1px solid;*/
     }
+
     html {
         scroll-behavior: smooth;
     }
@@ -33,8 +34,12 @@
                             class="pr-6 text-xs font-bold uppercase">Welcome back, {{Auth::user()->name}}
                         </button>
                     </x-slot>
-                    <x-dropdown-item href="/admin/posts/create" :active="request()->routeIs('post.create')">New Post</x-dropdown-item>
-                    <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
+                    @if(\App\Policies\PostPolicy::isAdmin())
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->routeIs('post.create')">
+                            New Post
+                        </x-dropdown-item>
+                        <x-dropdown-item href="/admin/dashboard" :active="request()->routeIs('dashboard')">Dashboard</x-dropdown-item>
+                    @endif
                     <x-dropdown-item href="#" x-data="{}" @click.prevent="document.getElementById('logout').submit()">
                         Log Out
                     </x-dropdown-item>
@@ -50,10 +55,10 @@
                 <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
             @endauth
             <div class="m-6 sm:m-auto">
-            <a href="#newsletter"
-               class="text-center bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
-                Subscribe for Updates
-            </a>
+                <a href="#newsletter"
+                   class="text-center bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
+                    Subscribe for Updates
+                </a>
             </div>
         </div>
     </nav>
