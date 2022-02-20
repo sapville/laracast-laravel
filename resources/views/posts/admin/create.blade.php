@@ -1,5 +1,5 @@
 <x-layout>
-    <x-settings :heading="'Publish New Post'">
+    <x-settings :heading="'Publish New Post'" :maxWidth="'max-w-2xl'">
         <form method="POST" action="/admin/posts/create" enctype="multipart/form-data">
             @csrf
 

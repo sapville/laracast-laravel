@@ -11,7 +11,7 @@ class AdminPostController extends Controller
 {
     public function index()
     {
-        return view('posts.admin.index', ['posts' => Post::query()->paginate(10)]);
+        return view('posts.admin.index', ['posts' => Post::query()->orderByDesc('updated_at')->paginate(10)]);
     }
 
     public function create()

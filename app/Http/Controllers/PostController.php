@@ -14,7 +14,7 @@ class PostController extends Controller
         //    \Illuminate\Support\Facades\DB::listen(fn($query) => logger($query->sql, $query->bindings));
 
         return view('posts.index', [
-            'blogPosts' => Post::query()->orderBy('id', 'desc')->filter(request()->only(['search', 'category', 'author']))->paginate(6)->withQueryString(),
+            'blogPosts' => Post::query()->orderBy('updated_at', 'desc')->filter(request()->only(['search', 'category', 'author']))->paginate(6)->withQueryString(),
         ]);
     }
 

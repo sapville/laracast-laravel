@@ -22,12 +22,13 @@ class SessionController extends Controller
 
     public function store(Request $request)
     {
+
         $credentials = request()->validate([
             'email' => ['required', 'email'],
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials)) {
+         if (Auth::attempt($credentials, $request->has('keep'))) {
             $request->session()->regenerate();
             return redirect('/')->with('success', 'Welcome back!');
         }

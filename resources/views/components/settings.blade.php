@@ -1,12 +1,12 @@
-@props(['heading'])
+@props(['heading', 'maxWidth'])
 
-<section class="max-w-4xl mx-auto py-8">
+<section class="{{$maxWidth}} mx-auto py-8">
     <h1 class="text-lg font-bold mb-4 border-b-2 border-gray-400 pb-2">
         {{$heading}}
     </h1>
 
     <div class="flex flex-col sm:flex-row">
-        <aside class="w-48">
+        <aside class="w-36 flex-shrink-0">
             <h2 class="font-bold sm:mb-2">Links</h2>
             <ul class="mb-4">
                 <li>
@@ -20,7 +20,7 @@
             </ul>
         </aside>
 
-        <main class="flex-1">
+        <main {{$attributes->class(['flex-1'])}}>
             <x-panel>
                 {{$slot}}
             </x-panel>

@@ -8,6 +8,9 @@
                     @csrf
                     <x-form.input-text name="email" type="email" autocomplete="username"/>
                     <x-form.input-text name="password" type="password" autocomplete="current-password"/>
+                    <input
+                        class="checked:bg-blue-500 mr-2"
+                        type="checkbox" name="keep" id="keep"><label for="keep" class="text-sm">Keep Me Logged In</label>
                     <x-form.button>Log In</x-form.button>
                 </form>
             </x-panel>
