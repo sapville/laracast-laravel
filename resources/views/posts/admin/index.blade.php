@@ -7,24 +7,26 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($posts as $post)
-                                <tr>
-                                    <td class="min-w-max pl-3 py-4 whitespace-nowrap hidden sm:block">
+                                <tr class="flex flex-col sm:table-row">
+                                    <td class="min-w-max pl-3 py-4 whitespace-nowrap hidden lg:block">
                                         <img class="h-10 w-10 rounded-xl" src="{{$post->thumbnail}}" alt="">
                                     </td>
-                                    <td class="pl-3 sm:pl-0 py-4 whitespace-nowrap">
+                                    <td class="pl-3 sm:py-4 py-3 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">{{$post->title}}</div>
                                     </td>
-                                    <td class="pl-3 sm:pl-0 py-4 whitespace-nowrap hidden sm:table-cell">
+                                    <td class="pl-3 py-4 whitespace-nowrap hidden lg:table-cell">
                                         @php
                                             $datetime = new DateTime($post->updated_at);
                                         @endphp
                                         <div class="text-sm text-gray-900"><time datetime="{{$datetime->format('o-m-d')}}">{{($datetime)->format('M j o')}}</time></div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                                    <td class="px-6 py-4 whitespace-nowrap hidden lg:table-cell">
                                         <x-category-label :category="$post->category"/>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <td class="px-6 sm:py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <a></a>
+                                    </td>
+                                    <td class="px-6 sm:py-4 py-3 whitespace-nowrap sm:text-right text-sm font-medium">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                     </td>
                                 </tr>
