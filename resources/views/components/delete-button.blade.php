@@ -1,5 +1,6 @@
 <form method="POST" {{$attributes->merge(['class' => 'flex justify-end'])}}>
     @csrf
+    @method('DELETE')
     <button type="submit">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:shadow-md" fill="none"
              viewBox="0 0 24 24"

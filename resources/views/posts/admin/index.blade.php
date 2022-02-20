@@ -23,11 +23,15 @@
                                     <td class="px-6 py-4 whitespace-nowrap hidden lg:table-cell">
                                         <x-category-label :category="$post->category"/>
                                     </td>
-                                    <td class="px-6 sm:py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <a></a>
+                                    <td class="px-6 sm:py-4 whitespace-nowrap text-sm font-medium text-blue-500">
+                                        <a
+                                            href="#"
+                                        >Edit</a>
                                     </td>
-                                    <td class="px-6 sm:py-4 py-3 whitespace-nowrap sm:text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    <td class="px-6 sm:py-4 py-3 whitespace-nowrap sm:text-right text-sm font-medium text-blue-500">
+                                        <a
+                                            href="#"
+                                        >Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
