@@ -14,15 +14,14 @@
                                     <td class="pl-3 sm:pl-0 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">{{$post->title}}</div>
                                     </td>
-                                    <td class="pl-3 sm:pl-0 py-4 whitespace-nowrap">
+                                    <td class="pl-3 sm:pl-0 py-4 whitespace-nowrap hidden sm:table-cell">
                                         @php
                                             $datetime = new DateTime($post->updated_at);
                                         @endphp
                                         <div class="text-sm text-gray-900"><time datetime="{{$datetime->format('o-m-d')}}">{{($datetime)->format('M j o')}}</time></div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"> Active </span>
+                                    <td class="px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                                        <x-category-label :category="$post->category"/>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
