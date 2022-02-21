@@ -8,7 +8,9 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PostController::class, 'index']);
+Route::get('back/{route}', fn(string $route) => redirect()->route($route));
+
+Route::get('/', [PostController::class, 'index'])->name('start');
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 Route::get('/admin/dashboard', [AdminPostController::class, 'index'])->middleware('admin')->name('dashboard');

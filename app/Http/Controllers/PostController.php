@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -17,8 +18,10 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('posts.show',
-            ['blogPost' => $post]
+        return view('posts.show', [
+                'blogPost' => $post,
+                'source' => Str::contains(request()->headers->get('referer'), 'dashboard') ? 'dashboard' : 'start'
+            ]
         );
     }
 
