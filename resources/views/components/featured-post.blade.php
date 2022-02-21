@@ -45,6 +45,6 @@
         </div>
     </div>
     @can('delete', $post)
-    <x-delete-button class="m-5" action="/admin/posts/{{$post->slug}}/delete"/>
+    <x-delete-button class="m-5" action="/admin/posts/{{$post->slug}}"/>
     @endcan
 </article>

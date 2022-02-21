@@ -12,7 +12,12 @@
                                         <img class="h-10 w-10 rounded-xl" src="{{$post->thumbnail}}" alt="">
                                     </td>
                                     <td class="pl-3 sm:py-4 py-3 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{$post->title}}</div>
+                                        <div class="text-sm text-gray-900">
+                                            <a
+                                                href="/posts/{{$post->slug}}"
+                                                class="hover:text-blue-500"
+                                            >{{$post->title}}</a>
+                                        </div>
                                     </td>
                                     <td class="pl-3 py-4 whitespace-nowrap hidden lg:table-cell">
                                         @php
@@ -29,9 +34,11 @@
                                         >Edit</a>
                                     </td>
                                     <td class="px-6 sm:py-4 py-3 whitespace-nowrap sm:text-right text-sm font-medium text-blue-500">
-                                        <a
-                                            href="#"
-                                        >Delete</a>
+                                        <form method="POST" action="/admin/posts/{{$post->slug}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

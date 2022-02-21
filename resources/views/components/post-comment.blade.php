@@ -19,6 +19,6 @@
         </div>
     </article>
     @can(['delete'], $comment)
-        <x-delete-button  action="/comment/{{$comment->id}}/delete"/>
+        <x-delete-button  action="/comment/{{$comment->id}}"/>
     @endcan
 </x-panel>
