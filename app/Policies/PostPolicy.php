@@ -30,6 +30,11 @@ class PostPolicy
         return self::isAdmin();
     }
 
+    public function update(): bool
+    {
+        return self::isAdmin();
+    }
+
     public static function isAdmin(): bool
     {
         $user = Auth::user();

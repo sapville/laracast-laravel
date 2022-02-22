@@ -17,7 +17,9 @@ Route::get('/admin/dashboard', [AdminPostController::class, 'index'])->middlewar
 Route::get('/admin/posts/create', [AdminPostController::class, 'create'])->middleware('admin')->name('post.create');
 Route::get('/admin/posts/{post:slug}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
 Route::post('/admin/posts/create', [AdminPostController::class, 'store'])->middleware('admin');
+Route::patch('/admin/posts/{post}', [AdminPostController::class, 'update'])->middleware('admin');
 Route::delete('/admin/posts/{post:slug}', [AdminPostController::class, 'destroy'])->middleware('admin');
+
 
 Route::post('posts/{post:slug}/comment', [CommentController::class, 'store'])->middleware('auth');
 Route::delete('comment/{comment}', [CommentController::class, 'destroy'])->middleware('auth');

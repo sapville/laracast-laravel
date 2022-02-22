@@ -9,7 +9,7 @@
                             @foreach($posts as $post)
                                 <tr class="flex flex-col sm:table-row">
                                     <td class="min-w-max pl-3 py-4 whitespace-nowrap hidden lg:block">
-                                        <img class="h-10 w-10 rounded-xl" src="{{$post->thumbnail}}" alt="">
+                                        <img class="h-10 rounded-xl" src="{{$post->thumbnail}}" alt="">
                                     </td>
                                     <td class="pl-3 sm:py-4 py-3 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
@@ -30,7 +30,7 @@
                                     </td>
                                     <td class="px-6 sm:py-4 whitespace-nowrap text-sm font-medium text-blue-500">
                                         <a
-                                            href="#"
+                                            href="/admin/posts/{{$post->slug}}/edit"
                                         >Edit</a>
                                     </td>
                                     <td class="px-6 sm:py-4 py-3 whitespace-nowrap sm:text-right text-sm font-medium text-blue-500">
