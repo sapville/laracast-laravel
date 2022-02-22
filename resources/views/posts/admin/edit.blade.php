@@ -28,7 +28,6 @@
                     :required="''"
                     type="file"/>
                 <div class="flex sm:flex-1 sm:justify-center w-full">
-                    <input hidden name="thumbnail-changed" id="thumbnail-changed" x-bind:value="changed">
                     <img
                         x-show="! changed"
                         class="h-24 sm:pl-4"

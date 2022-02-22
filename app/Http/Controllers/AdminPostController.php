@@ -62,7 +62,7 @@ class AdminPostController extends Controller
     {
         $this->authorize('update', $post);
         $this->validation_rules['title'] = ['required', 'max:255', Rule::unique('posts', 'title')->ignore($post)];
-        if (request('thumbnail-changed') === 'false') {
+        if (!$request->has('thumbnail')) {
             unset($this->validation_rules['thumbnail']);
         }
 
@@ -70,12 +70,10 @@ class AdminPostController extends Controller
 
         if (isset($this->validation_rules['thumbnail']))
             $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails');
-        else
-            unset($attributes['thumbnail']);
 
-        Post::query()->where('id', '=', $post->id)->update($attributes);
+        $post->update($attributes);
 
-        return redirect()->route('dashboard')->with('Post has been updated');
+        return redirect()->route('dashboard')->with('success', 'Post has been updated');
 
     }
 
