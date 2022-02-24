@@ -34,12 +34,12 @@
                             class="pr-6 text-xs font-bold uppercase">Welcome back, {{Auth::user()->name}}
                         </button>
                     </x-slot>
-                    @if(\App\Policies\PostPolicy::isAdmin())
+                   @can('admin')
                         <x-dropdown-item href="/admin/posts/create" :active="request()->routeIs('post.create')">
                             New Post
                         </x-dropdown-item>
                         <x-dropdown-item href="/admin/dashboard" :active="request()->routeIs('dashboard')">Dashboard</x-dropdown-item>
-                    @endif
+                    @endcan
                     <x-dropdown-item href="#" x-data="{}" @click.prevent="document.getElementById('logout').submit()">
                         Log Out
                     </x-dropdown-item>

@@ -2,7 +2,7 @@
 <form method="POST" action="/admin/posts/{{$post->slug}}" {{$attributes->merge(['class' => 'flex justify-end'])}}>
     @csrf
     @method('DELETE')
-    @can('update', $post)
+    @can('admin')
         <a href="/admin/posts/{{$post->slug}}/edit">
             <svg xmlns="http://www.w3.org/2000/svg"
                  class="h-6 w-6 hover:shadow-md m-2"
@@ -14,7 +14,7 @@
             </svg>
         </a>
     @endcan
-    @can('delete', $post)
+    @can('admin')
         <button type="submit">
             <svg xmlns="http://www.w3.org/2000/svg"
                  class="h-6 w-6 hover:shadow-md m-2"

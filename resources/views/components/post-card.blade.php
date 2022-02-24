@@ -47,7 +47,5 @@
             </footer>
         </div>
     </div>
-    @can('delete', $post)
-        <x-delete-button class="mr-5 mb-5" :post="$post"/>
-    @endcan
+    <x-delete-button class="mr-5 mb-5" :post="$post"/>
 </article>

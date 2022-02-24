@@ -44,7 +44,7 @@ class AdminPostController extends Controller
     public function store(Post $post, Request $request)
     {
 
-        $this->authorize('create', $post);
+        $this->authorize('admin');
         $attributes = request()->validate($this->validation_rules);
 
         $attributes['user_id'] = auth()->user()->id;
@@ -52,7 +52,7 @@ class AdminPostController extends Controller
 
         $post = Post::query()->create($attributes);
 
-        return redirect('posts/' . $post->slug)->with('Post has been published');
+        return redirect('posts/' . $post->slug)->with('success','Post has been published');
     }
 
     /**
@@ -60,7 +60,7 @@ class AdminPostController extends Controller
      */
     public function update(Post $post, Request $request)
     {
-        $this->authorize('update', $post);
+        $this->authorize('admin');
         $this->validation_rules['title'] = ['required', 'max:255', Rule::unique('posts', 'title')->ignore($post)];
         if (!$request->has('thumbnail')) {
             unset($this->validation_rules['thumbnail']);
@@ -82,7 +82,7 @@ class AdminPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $this->authorize('delete', $post);
+        $this->authorize('admin');
         $post->delete();
         return back()->with('success', 'Post has been deleted');
     }
