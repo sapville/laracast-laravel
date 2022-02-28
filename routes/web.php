@@ -13,12 +13,14 @@ Route::get('back/{route}', fn(string $route) => redirect()->route($route));
 Route::get('/', [PostController::class, 'index'])->name('start');
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::get('/admin/dashboard', [AdminPostController::class, 'index'])->middleware('admin')->name('dashboard');
-Route::get('/admin/posts/create', [AdminPostController::class, 'create'])->middleware('admin')->name('post.create');
-Route::get('/admin/posts/{post:slug}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
-Route::post('/admin/posts/create', [AdminPostController::class, 'store'])->middleware('admin');
-Route::patch('/admin/posts/{post}', [AdminPostController::class, 'update'])->middleware('admin');
-Route::delete('/admin/posts/{post:slug}', [AdminPostController::class, 'destroy'])->middleware('admin');
+Route::middleware('can:admin')->group(function () {
+    Route::get('/admin/dashboard', [AdminPostController::class, 'index'])->name('dashboard');
+    Route::get('/admin/posts/create', [AdminPostController::class, 'create'])->name('post.create');
+    Route::get('/admin/posts/{post:slug}/edit', [AdminPostController::class, 'edit']);
+    Route::post('/admin/posts/create', [AdminPostController::class, 'store']);
+    Route::patch('/admin/posts/{post}', [AdminPostController::class, 'update']);
+    Route::delete('/admin/posts/{post:slug}', [AdminPostController::class, 'destroy']);
+});
 
 
 Route::post('posts/{post:slug}/comment', [CommentController::class, 'store'])->middleware('auth');
