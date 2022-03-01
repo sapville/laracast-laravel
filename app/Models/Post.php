@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class Post extends Model
@@ -24,7 +25,7 @@ class Post extends Model
         }*/
 
     protected $with = ['category', 'author'];
-    protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'body', 'category_id', 'thumbnail'];
+    protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'body', 'category_id', 'thumbnail', 'published_at'];
 
     public function category(): BelongsTo
     {
@@ -48,6 +49,8 @@ class Post extends Model
                 ->where('body', 'like', "%$search%")
                 ->orWhere('title', 'like', "%$search%")
             );
+        })->when(!Gate::allows('admin'), function (Builder $builder) {
+            $builder->whereNotNull('published_at');
         });
 
         $query->when($request['category'] ?? false, function (Builder $builder, $search) {

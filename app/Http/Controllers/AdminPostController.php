@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +16,13 @@ class AdminPostController extends Controller
     public function __construct()
     {
         $this->validation_rules = [
-            'title' => ['required', 'max:255', Rule::unique('posts', 'title')],
+            'title' => ['required', 'max:255', Rule::unique('posts', 'title'),
+                function($attribute, $value, $fail) {
+                    $post = new Post();
+                    $post->title = $value;
+                    if (Post::query()->where('slug', '=', $post->slug)->first())
+                        $fail('Please choose another title');
+                }],
             'excerpt' => 'required',
             'body' => 'required',
             'category_id' => ['required', Rule::exists('categories', 'id')],
@@ -49,6 +56,7 @@ class AdminPostController extends Controller
 
         $attributes['user_id'] = auth()->user()->id;
         $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails');
+        $attributes['published_at'] = $request->input('draft') ? null : Carbon::now();
 
         $post = Post::query()->create($attributes);
 
@@ -70,6 +78,7 @@ class AdminPostController extends Controller
 
         if (isset($this->validation_rules['thumbnail']))
             $attributes['thumbnail'] = $request->file('thumbnail')->store('thumbnails');
+        $attributes['published_at'] = $request->input('draft') ? null : now();
 
         $post->update($attributes);
 

@@ -19,7 +19,7 @@
             </x-form.input-field>
 
             <x-form.input-text :name="'thumbnail'" type="file"/>
-
+            <x-form.input-checkbox :name="'draft'" :checked="old('draft')">Publish as Draft</x-form.input-checkbox>
             <x-form.button>Publish</x-form.button>
         </form>
     </x-settings>

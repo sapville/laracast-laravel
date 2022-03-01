@@ -19,6 +19,13 @@
                                             >{{$post->title}}</a>
                                         </div>
                                     </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                                                {{ $post->published_at ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yeloow-800'}}">
+                                            {{$post->published_at ? ' Published ' : ' Draft '}}
+                                        </span>
+                                    </td>
                                     <td class="pl-3 py-4 whitespace-nowrap hidden lg:table-cell">
                                         @php
                                             $datetime = new DateTime($post->updated_at);

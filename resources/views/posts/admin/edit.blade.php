@@ -34,6 +34,7 @@
                         src="{{$post->thumbnail}}" alt="Post Thumbnail">
                 </div>
             </div>
+            <x-form.input-checkbox :name="'draft'" :checked="old('draft', !isset($post->published_at))">Save as Draft</x-form.input-checkbox>
             <x-form.button>Save Changes</x-form.button>
         </form>
     </x-settings>
