@@ -1,6 +1,6 @@
 @props(['post'])
 <article
-    class="transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl">
+    class="transition-colors duration-300 hover:bg-gray-100 rounded-xl {{ $post->published_at ? 'border border-black border-opacity-0 hover:border-opacity-5 m-2' : 'border-4 border-yellow-100 m-0.5'  }}">
     <div class="py-6 px-5 lg:flex">
         <div class="flex-1 lg:mr-8">
             <img src="{{$post->thumbnail}}" alt="Blog Post illustration" class="rounded-xl">
