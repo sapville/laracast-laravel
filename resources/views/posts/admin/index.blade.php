@@ -9,7 +9,7 @@
                             @foreach($posts as $post)
                                 <tr class="flex flex-col sm:table-row">
                                     <td class="min-w-max pl-3 py-4 whitespace-nowrap hidden lg:block">
-                                        <img class="h-10 rounded-xl" src="{{$post->thumbnail}}" alt="">
+                                        <img class="w-10 h-10 object-cover   rounded-md" src="{{$post->thumbnail}}" alt="">
                                     </td>
                                     <td class="pl-3 sm:py-4 py-3 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
