@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\PostView;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,27 @@ class DatabaseSeeder extends Seeder
     {
 
         $user = User::factory()->create();
+
+        User::factory()->create([
+            'name' => 'eugene',
+            'username' => 'fedoseev',
+            'email' => 'eu@fedo.com',
+            'password' => 'password',
+        ]);
+
+        User::factory()->create([
+            'name' => 'john',
+            'username' => 'dow',
+            'email' => 'john@doe.com',
+            'password' => 'password',
+        ]);
+
+        User::factory()->create([
+            'name' => 'someone',
+            'username' => 'strange',
+            'email' => 'some@strange.com',
+            'password' => 'password',
+        ]);
 
         $workCategory = Category::factory()->create([
             'slug' => 'work',
@@ -51,6 +73,10 @@ class DatabaseSeeder extends Seeder
 
         $post = Post::query()->orderBy('id', 'desc')->first();
         Comment::factory(5)->create([
+            'post_id' => $post
+        ]);
+
+        PostView::factory(5)->create([
             'post_id' => $post
         ]);
 

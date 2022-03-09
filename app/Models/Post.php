@@ -24,8 +24,13 @@ class Post extends Model
             return 'slug';
         }*/
 
-    protected $with = ['category', 'author'];
+    protected $with = ['category', 'author', 'postView'];
     protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'body', 'category_id', 'thumbnail', 'published_at'];
+
+    public function postView(): HasMany
+    {
+        return $this->hasMany(PostView::class);
+    }
 
     public function category(): BelongsTo
     {
