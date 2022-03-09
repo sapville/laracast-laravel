@@ -40,9 +40,12 @@ class AdminPostController extends Controller
         return view('posts.admin.create');
     }
 
-    public function edit(Post $post)
+    public function edit(Post $post, Request $request)
     {
-        return view('posts.admin.edit', ['post' => $post]);
+        request()->session()->put('source', url()->previous());
+        return view('posts.admin.edit', [
+            'post' => $post,
+        ]);
     }
 
     /**
@@ -82,7 +85,9 @@ class AdminPostController extends Controller
 
         $post->update($attributes);
 
-        return redirect()->route('dashboard')->with('success', 'Post has been updated');
+        return redirect(
+            $request->session()->has('source') ? $request->session()->pull('source') : '/'
+        )->with('success', 'Post has been updated');
 
     }
 
