@@ -19,6 +19,7 @@
                     <span class="mt-2 block text-gray-400 text-xs">
                                         Published <time>{{$post->created_at->diffForHumans()}}</time>
                                     </span>
+                    <x-view-count :count="$post->postView->count()"/>
                 </div>
             </header>
 
