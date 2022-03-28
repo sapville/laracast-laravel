@@ -21,10 +21,11 @@ class PostController extends Controller
     public function show(Post $post)
     {
 
-        PostView::query()->create([
-            'post_id' => $post->id,
-            'user_id' => Auth::id()
-        ]);
+        if ($post->author->id !== Auth::user()->id)
+            PostView::query()->create([
+                'post_id' => $post->id,
+                'user_id' => Auth::id()
+            ]);
 
         return view('posts.show', [
                 'blogPost' => $post,

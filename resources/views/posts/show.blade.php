@@ -23,6 +23,8 @@
                     <time>{{$blogPost->created_at->diffForHumans()}}</time>
                 </p>
 
+                <x-view-count :post="$blogPost"/>
+
                 <div class="flex items-center lg:justify-center text-sm mt-4">
                     <img src="/images/lary-avatar.svg" alt="Lary avatar">
                     <div class="ml-3 text-left">
