@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostView;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -18,6 +20,12 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+
+        PostView::query()->create([
+            'post_id' => $post->id,
+            'user_id' => Auth::id()
+        ]);
+
         return view('posts.show', [
                 'blogPost' => $post,
                 'source' => Str::contains(request()->headers->get('referer'), 'dashboard') ? 'dashboard' : 'start'
