@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bookmark;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
@@ -22,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $user = User::factory()->create();
 
-        User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'eugene',
             'username' => 'fedoseev',
             'email' => 'eu@fedo.com',
@@ -78,6 +79,11 @@ class DatabaseSeeder extends Seeder
 
         PostView::factory(5)->create([
             'post_id' => $post
+        ]);
+
+        Bookmark::factory()->create([
+            'post_id' => $post,
+            'user_id' => $admin,
         ]);
 
 
