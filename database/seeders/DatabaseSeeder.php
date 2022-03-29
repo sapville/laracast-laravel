@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'john',
-            'username' => 'dow',
+            'username' => 'doe',
             'email' => 'john@doe.com',
             'password' => 'password',
         ]);

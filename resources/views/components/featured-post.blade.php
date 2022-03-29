@@ -13,7 +13,7 @@
 
                 <div class="mt-4">
                     <h1 class="text-3xl">
-                        <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
+                        <a href="/posts/{{$post->slug}}">{{$post->title}}</a><x-bookmark :post="$post"/>
                     </h1>
 
                     <span class="mt-2 block text-gray-400 text-xs">

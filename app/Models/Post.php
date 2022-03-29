@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -24,8 +25,12 @@ class Post extends Model
             return 'slug';
         }*/
 
-    protected $with = ['category', 'author', 'postView'];
+    protected $with = ['category', 'author', 'postView', 'bookmarks'];
     protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'body', 'category_id', 'thumbnail', 'published_at'];
+
+    public function bookmarks(): BelongsToMany {
+        return $this->belongsToMany(User::class, 'bookmarks');
+    }
 
     public function postView(): HasMany
     {

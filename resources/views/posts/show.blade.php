@@ -42,6 +42,7 @@
 
                 <h1 class="font-bold text-3xl lg:text-4xl mb-10">
                     {{$blogPost->title}}
+                    <x-bookmark :post="$blogPost"/>
                 </h1>
 
                 <div class="space-y-4 lg:text-lg leading-loose">
