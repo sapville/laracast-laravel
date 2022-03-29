@@ -13,7 +13,6 @@ Route::get('back/{route}', fn(string $route) => redirect()->route($route));
 
 Route::get('/', [PostController::class, 'index'])->name('start');
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
-Route::get('bookmarks', [BookmarkController::class, 'index']);
 
 Route::middleware('can:admin')->group(function () {
     Route::get('/admin/dashboard', [AdminPostController::class, 'index'])->name('dashboard');
@@ -24,9 +23,11 @@ Route::middleware('can:admin')->group(function () {
     Route::delete('/admin/posts/{post:slug}', [AdminPostController::class, 'destroy']);
 });
 
-
 Route::post('posts/{post:slug}/comment', [CommentController::class, 'store'])->middleware('auth');
 Route::delete('comment/{comment}', [CommentController::class, 'destroy'])->middleware('auth');
+
+Route::get('bookmarks', [BookmarkController::class, 'index']);
+Route::patch('bookmarks/{post:slug}/update', [BookmarkController::class, 'update']);
 
 Route::get('register', [RegistrationController::class, 'create'])->middleware('guest');
 Route::post('register', [RegistrationController::class, 'store'])->middleware('guest');

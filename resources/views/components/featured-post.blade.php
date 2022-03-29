@@ -13,7 +13,10 @@
 
                 <div class="mt-4">
                     <h1 class="text-3xl">
-                        <a href="/posts/{{$post->slug}}">{{$post->title}}</a><x-bookmark :post="$post"/>
+                        <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
+                        @auth
+                            <x-bookmark :post="$post"/>
+                        @endauth
                     </h1>
 
                     <span class="mt-2 block text-gray-400 text-xs">
@@ -24,7 +27,7 @@
             </header>
 
             <div class="text-sm mt-2 space-y-4">
-                    {!! $post->excerpt !!}
+                {!! $post->excerpt !!}
             </div>
 
             <footer class="flex justify-between items-center mt-8">

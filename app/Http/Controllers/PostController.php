@@ -21,7 +21,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
 
-        if ($post->author->id !== Auth::user()->id)
+        if (Auth::id() && $post->author->id !== Auth::id())
             PostView::query()->create([
                 'post_id' => $post->id,
                 'user_id' => Auth::id()

@@ -14,7 +14,8 @@
 
             Back to Posts
         </a>
-        <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10 {{ $blogPost->published_at ? '' : 'p-4 rounded-xl border-4 border-yellow-100'}}">
+        <article
+            class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10 {{ $blogPost->published_at ? '' : 'p-4 rounded-xl border-4 border-yellow-100'}}">
             <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
                 <img src="{{$blogPost->thumbnail}}" alt="Thumbnail" class="rounded-xl">
 
@@ -42,7 +43,9 @@
 
                 <h1 class="font-bold text-3xl lg:text-4xl mb-10">
                     {{$blogPost->title}}
-                    <x-bookmark :post="$blogPost"/>
+                    @auth
+                        <x-bookmark :post="$blogPost"/>
+                    @endauth
                 </h1>
 
                 <div class="space-y-4 lg:text-lg leading-loose">

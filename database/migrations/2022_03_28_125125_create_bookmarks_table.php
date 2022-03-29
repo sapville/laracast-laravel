@@ -20,6 +20,7 @@ class CreateBookmarksTable extends Migration
             $table->foreignIdFor(Post::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
+            $table->unique(['post_id', 'user_id']);
         });
     }
 
